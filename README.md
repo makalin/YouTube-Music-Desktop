@@ -1,27 +1,64 @@
 # YouTube Music Player (Rust Edition)
 
-A lightweight, cross-platform desktop application for YouTube Music, built with Rust and Tauri, bundled with custom plugins, an integrated ad blocker, and a downloader.
+A modern, feature-rich desktop application for YouTube Music, built with Rust and Tauri. Features a beautiful, responsive UI with advanced playback controls, favorites management, and extensive customization options.
 
-## Features
+## ✨ Features
 
-- **Music Playback**: Stream YouTube Music with a native desktop experience.
-- **Custom Plugins**: Extend functionality with plugins written in Rust.
-- **Ad Blocker**: Built-in ad blocker for uninterrupted listening.
-- **Downloader**: Download tracks for offline playback (use responsibly).
-- **Cross-Platform**: Supports Windows, macOS, and Linux.
-- **Lightweight**: Powered by Tauri for minimal resource usage.
-- **Customizable UI**: Apply custom themes via CSS or Rust-based styling.
+### 🎵 Core Playback
+- **YouTube Music Integration**: Seamless playback of YouTube Music and YouTube videos
+- **Link Support**: Paste any YouTube Music, YouTube video, or playlist link
+- **Embedded Player**: High-quality playback with autoplay support
+- **Track Information**: Real-time title, artist, and thumbnail display
 
-## Installation
+### 🎨 Modern UI & Customization
+- **Beautiful Design**: Modern card-based layout with shadows and rounded corners
+- **Theme Support**: Light, dark, and auto themes with smooth transitions
+- **Custom Accent Colors**: Personalize the app with your favorite colors
+- **Responsive Design**: Works perfectly on all screen sizes
+- **Mini Player**: Compact, draggable player for multitasking
+
+### ⭐ Favorites & History
+- **Favorites Management**: Save and organize your favorite tracks
+- **Play History**: Automatic tracking of recently played content
+- **Quick Access**: One-click playback from favorites or history
+- **Persistent Storage**: All data saved locally using localStorage
+
+### 🎮 Advanced Controls
+- **Keyboard Shortcuts**: 
+  - `Space`: Play/Pause
+  - `←/→`: Previous/Next
+  - `M`: Mute/Unmute
+  - `T`: Toggle theme
+  - `F`: Add to favorites
+  - `H`: Show history
+  - `P`: Show playlist
+  - `L`: Show favorites
+- **Player Controls**: Play, pause, previous, next, mute
+- **Utility Buttons**: Copy link, share, open in browser, download
+
+### ⚙️ Settings & Configuration
+- **Settings Modal**: Comprehensive configuration options
+- **Default Homepage**: Set your preferred starting page
+- **Utility Toggle**: Show/hide utility buttons
+- **Theme Persistence**: Remembers your theme preference
+- **Accent Color**: Customize the app's primary color
+
+### 📱 Additional Features
+- **Notifications**: Real-time feedback for actions
+- **Download Support**: Download tracks (Rust backend integration)
+- **Playlist Support**: Basic playlist navigation and queue management
+- **Share Integration**: Native sharing or clipboard fallback
+- **Cross-Platform**: Windows, macOS, and Linux support
+
+## 🚀 Installation
 
 ### Prerequisites
 
-- [Rust](https://www.rust-lang.org/tools/install) (stable, latest version recommended)
-- [Node.js](https://nodejs.org/) (v20 or later, for Tauri frontend dependencies)
-- [pnpm](https://pnpm.io/) (for managing frontend dependencies)
-- A modern web browser for development
+- [Rust](https://www.rust-lang.org/tools/install) (stable, latest version)
+- [Node.js](https://nodejs.org/) (v20 or later)
+- [pnpm](https://pnpm.io/) (recommended package manager)
 
-### Steps
+### Development Setup
 
 1. **Clone the Repository**:
    ```bash
@@ -31,139 +68,153 @@ A lightweight, cross-platform desktop application for YouTube Music, built with 
 
 2. **Install Dependencies**:
    ```bash
-   pnpm install --frozen-lockfile
+   pnpm install
    ```
 
-3. **Build and Run**:
+3. **Run Development Server**:
    ```bash
-   cargo tauri dev
+   pnpm tauri dev
    ```
-   This starts the development server and launches the app.
 
-4. **Package for Distribution**:
+4. **Build for Production**:
    ```bash
-   cargo tauri build
-   ```
-   Outputs executables in `src-tauri/target/release`.
-
-### Alternative Installation (Binary)
-
-- **Windows**: Use [Winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/):
-  ```bash
-  winget install your-username.YouTubeMusicRust
-  ```
-  Note: Microsoft Defender SmartScreen may flag the app as from an "unknown publisher."
-
-- **macOS**: Use [Homebrew](https://brew.sh/):
-  ```bash
-  brew install --cask https://raw.githubusercontent.com/your-username/youtube-music-rust/master/youtube-music-rust.rb
-  ```
-  If you encounter a "damaged app" error, run:
-  ```bash
-  xattr -cr /Applications/YouTube\ Player.app
-  ```
-
-- **Linux**: Use [Scoop](https://scoop.sh/) (extras bucket):
-  ```bash
-  scoop bucket add extras
-  scoop install extras/youtube-player
-  ```
-
-## Plugins
-
-Extend the app with custom plugins. Examples include:
-
-- **Equalizer**: Adjust audio frequencies (e.g., bass boost).
-- **Precise Volume**: Fine-tune volume with mouse wheel or hotkeys.
-- **SponsorBlock**: Skip non-music sections in videos.
-- **Video Toggle**: Switch between video and audio-only modes.
-
-### Creating a Plugin
-
-1. Create a new folder in `src-tauri/plugins/your-plugin-name`.
-2. Define the plugin in Rust, implementing the `Plugin` trait:
-
-   ```rust
-   use tauri::plugin::Plugin;
-
-   pub struct MyPlugin;
-
-   impl Plugin for MyPlugin {
-       fn name(&self) -> &'static str {
-           "My Plugin"
-       }
-
-       fn initialize(&self, app: &tauri::App) -> tauri::Result<()> {
-           // Initialize plugin (e.g., register commands)
-           Ok(())
-       }
-   }
+   pnpm tauri build
    ```
 
-3. Register the plugin in `src-tauri/src/main.rs`:
+## 🎯 Usage
 
-   ```rust
-   fn main() {
-       tauri::Builder::default()
-           .plugin(MyPlugin)
-           .run(tauri::generate_context!())
-           .expect("Error running Tauri app");
-   }
-   ```
+### Basic Playback
+1. Launch the app
+2. Paste a YouTube Music or YouTube video link in the input field
+3. Click the play button (▶️) or press Enter
+4. Enjoy your music!
 
-4. Add frontend logic (if needed) in `src/` using JavaScript/CSS.
+### Advanced Features
+- **Favorites**: Click the star (⭐) button to save tracks
+- **Mini Player**: Click the mini player button (🗕) for a compact view
+- **Settings**: Click the gear (⚙️) to customize the app
+- **Keyboard Shortcuts**: Use keyboard shortcuts for quick actions
 
-## Development
+### Theme Customization
+1. Open Settings (⚙️)
+2. Choose your preferred theme (Light/Dark/Auto)
+3. Pick a custom accent color
+4. Save your preferences
 
-To contribute or modify the app:
+## 🛠️ Development
 
-1. Install dependencies as above.
-2. Run `cargo tauri dev` for live reloading.
-3. Submit pull requests to `https://github.com/makalin/youtube-player`.
-
-### Custom CSS
-
-Inject custom styles by adding a `style.css` file in your plugin folder:
-
-```css
-/* style.css */
-.ytmusic-nav-bar .sign-in-link {
-    display: none; /* Hide Google login button */
-}
+### Project Structure
+```
+youtube-player/
+├── src/                    # Frontend (HTML/CSS/JS)
+│   ├── src/
+│   │   ├── index.html     # Main UI
+│   │   ├── style.css      # Modern styling
+│   │   └── main.js        # Interactive features
+├── src-tauri/             # Rust backend
+│   ├── src/
+│   │   └── main.rs        # Tauri app entry
+│   ├── Cargo.toml         # Rust dependencies
+│   └── tauri.conf.json    # Tauri configuration
+├── package.json           # Node.js dependencies
+└── vite.config.ts         # Vite configuration
 ```
 
-Load it in your plugin:
+### Key Technologies
+- **Frontend**: Plain HTML, CSS, JavaScript (no frameworks)
+- **Backend**: Rust with Tauri
+- **Styling**: Modern CSS with CSS variables and responsive design
+- **Storage**: localStorage for favorites, history, and settings
+- **APIs**: YouTube embed API, noembed.com for track info
 
-```rust
-use tauri::Manager;
+### Adding Features
+The app is designed to be easily extensible:
+- Add new UI elements in `src/src/index.html`
+- Style them in `src/src/style.css`
+- Implement functionality in `src/src/main.js`
+- Add Rust backend commands in `src-tauri/src/main.rs`
 
-fn inject_css(app: &tauri::App) {
-    let window = app.get_window("main").unwrap();
-    window.eval(&format!(
-        "const style = document.createElement('style'); style.textContent = '{}'; document.head.append(style);",
-        include_str!("style.css")
-    )).unwrap();
-}
-```
+## 🎨 UI Features
 
-## Contributing
+### Modern Design
+- Card-based layout with subtle shadows
+- Smooth animations and transitions
+- Responsive design for all screen sizes
+- Professional color scheme with customization
 
-Any help will be a great contribution! Please follow these steps:
+### Interactive Elements
+- Hover effects on all buttons
+- Smooth theme transitions
+- Draggable mini player
+- Collapsible side panels
 
-1. Fork the repository.
-2. Create a feature branch (`git checkout -b feature/my-feature`).
-3. Commit changes (`git commit -m "Add my feature"`).
-4. Push to the branch (`git push origin feature/my-feature`).
-5. Open a pull request.
+### Accessibility
+- Keyboard navigation support
+- Screen reader friendly
+- High contrast themes
+- Responsive touch targets
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+## 🔧 Configuration
 
-## License
+### Settings Options
+- **Theme**: Light, Dark, or Auto (system preference)
+- **Accent Color**: Customize the primary color
+- **Default Homepage**: Set your preferred starting URL
+- **Utility Buttons**: Toggle visibility of utility controls
+
+### Keyboard Shortcuts
+All shortcuts work globally (except when typing in input fields):
+- `Space`: Play/Pause
+- `M`: Mute/Unmute
+- `T`: Toggle theme
+- `F`: Add to favorites
+- `H`: Show history
+- `P`: Show playlist
+- `L`: Show favorites
+- `←/→`: Previous/Next track
+
+## 🚀 Future Enhancements
+
+### Planned Features
+- **Real Download Support**: Full MP3 download functionality
+- **Playlist Management**: Advanced playlist creation and editing
+- **Audio Equalizer**: Built-in audio controls
+- **Ad Blocker**: Integrated ad blocking
+- **Offline Mode**: Cache tracks for offline playback
+- **Sync**: Cloud sync for favorites and settings
+
+### Plugin System
+- **Custom Plugins**: Extend functionality with Rust plugins
+- **Theme Plugins**: Community-created themes
+- **Audio Plugins**: Advanced audio processing
+
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
+
+### Development Workflow
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## 📄 License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
-- Inspired by [th-ch/youtube-music](https://github.com/th-ch/youtube-music).
-- Built with [Tauri](https://tauri.app/) and [Rust](https://www.rust-lang.org/).
-- Thanks to all contributors!
+- Built with [Tauri](https://tauri.app/) and [Rust](https://www.rust-lang.org/)
+- Inspired by modern music player designs
+- Thanks to all contributors and the open-source community!
+
+## 📞 Support
+
+- **Issues**: [GitHub Issues](https://github.com/makalin/youtube-player/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/makalin/youtube-player/discussions)
+- **Documentation**: [Wiki](https://github.com/makalin/youtube-player/wiki)
+
+---
+
+**Made with ❤️ using Rust + Tauri**

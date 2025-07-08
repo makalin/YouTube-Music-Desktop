@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Music Player</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">🎵 <span>YouTube Music Player</span></div>
+    <div class="header-actions">
+      <button id="mini-player-btn" title="Mini Player">🗕</button>
+      <button id="favorites-btn" title="Show Favorites">⭐</button>
+      <button id="history-btn" title="Show History">🕑</button>
+      <button id="settings-btn" title="Settings">⚙️</button>
+      <button id="theme-toggle" title="Toggle theme">🌙</button>
+    </div>
+  </header>
+  <main class="main-content">
+    <section class="player-card" id="player-card">
+      <div class="link-input-row">
+        <input id="music-link" type="text" placeholder="Paste YouTube Music or Video/Playlist Link..." />
+        <button id="play-link-btn" title="Play Link">▶️</button>
+        <button id="open-browser-btn" title="Open in Browser">🌐</button>
+        <button id="copy-link-btn" title="Copy Link">🔗</button>
+        <button id="share-link-btn" title="Share Link">📤</button>
+        <button id="download-btn" title="Download MP3">⬇️</button>
+        <button id="favorite-link-btn" title="Add to Favorites">⭐</button>
+      </div>
+      <div class="iframe-container">
+        <iframe id="music-frame" src="https://music.youtube.com" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </div>
+      <div class="track-info-row">
+        <img id="track-thumb" class="track-thumb" src="" alt="" style="display:none;"/>
+        <span id="track-title">No track loaded</span>
+        <span id="track-artist"></span>
+      </div>
+      <div class="player-controls">
+        <button id="prev-btn" title="Previous">⏮️</button>
+        <button id="play-btn" title="Play/Pause">⏯️</button>
+        <button id="next-btn" title="Next">⏭️</button>
+        <button id="mute-btn" title="Mute/Unmute">🔇</button>
+        <button id="playlist-btn" title="Show Playlist">📃</button>
+      </div>
+      <div id="playlist-queue" class="playlist-queue hidden"></div>
+    </section>
+    <aside id="favorites-panel" class="side-panel hidden">
+      <h2>⭐ Favorites</h2>
+      <ul id="favorites-list"></ul>
+    </aside>
+    <aside id="history-panel" class="side-panel hidden">
+      <h2>🕑 History</h2>
+      <ul id="history-list"></ul>
+    </aside>
+    <aside id="playlist-panel" class="side-panel hidden">
+      <h2>📃 Playlist</h2>
+      <ul id="playlist-list"></ul>
+    </aside>
+    <div id="mini-player" class="mini-player hidden">
+      <iframe id="mini-music-frame" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      <div class="mini-controls">
+        <button id="mini-close-btn" title="Close Mini Player">❌</button>
+        <button id="mini-play-btn" title="Play/Pause">⏯️</button>
+      </div>
+    </div>
+    <div id="notification" class="notification hidden"></div>
+    <div id="settings-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close" id="settings-close">&times;</span>
+        <h2>Settings</h2>
+        <label>Theme:
+          <select id="theme-select">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="auto">Auto</option>
+          </select>
+        </label>
+        <label>Accent Color:
+          <input type="color" id="accent-color-picker" value="#ff1744" />
+        </label>
+        <label>Default Homepage:
+          <input type="text" id="default-homepage" placeholder="https://music.youtube.com" />
+        </label>
+        <label><input type="checkbox" id="show-utility-btns" checked /> Show Utility Buttons</label>
+        <button id="save-settings">Save</button>
+      </div>
+    </div>
+  </main>
+  <footer class="app-footer">
+    <span>Made with ❤️ using Rust + Tauri</span>
+  </footer>
+  <script src="main.js"></script>
+</body>
+</html>

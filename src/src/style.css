@@ -1,0 +1,411 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg, #f5f6fa);
+  color: var(--fg, #222);
+  transition: background 0.3s, color 0.3s;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+:root {
+  --primary: #ff1744;
+  --primary-dark: #c4001d;
+  --accent: #ffd600;
+  --bg: #f5f6fa;
+  --fg: #222;
+  --card-bg: #fff;
+  --card-shadow: 0 4px 32px rgba(0,0,0,0.10);
+  --input-bg: #f0f0f0;
+  --input-fg: #222;
+  --footer-bg: #fff;
+  --panel-bg: #fff;
+  --panel-shadow: 0 2px 16px rgba(0,0,0,0.10);
+  --notif-bg: #232323ee;
+  --notif-fg: #ffd600;
+}
+body.dark {
+  --bg: #181818;
+  --fg: #eee;
+  --card-bg: #232323;
+  --card-shadow: 0 4px 32px rgba(0,0,0,0.25);
+  --input-bg: #232323;
+  --input-fg: #eee;
+  --footer-bg: #232323;
+  --panel-bg: #232323;
+  --panel-shadow: 0 2px 16px rgba(0,0,0,0.25);
+  --notif-bg: #ffd600ee;
+  --notif-fg: #232323;
+}
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--primary);
+  color: #fff;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  font-size: 1.2rem;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+.header-actions button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  margin-left: 0.5rem;
+}
+.header-actions button:hover {
+  color: var(--accent);
+}
+.main-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem 1rem 1rem;
+  position: relative;
+}
+.player-card {
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  border-radius: 18px;
+  padding: 2rem 2.5rem 1.5rem 2.5rem;
+  max-width: 540px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: stretch;
+  z-index: 2;
+}
+.link-input-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.link-input-row input {
+  flex: 1;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  border: none;
+  background: var(--input-bg);
+  color: var(--input-fg);
+  font-size: 1rem;
+  outline: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  transition: background 0.2s, color 0.2s;
+}
+.link-input-row button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  padding: 0.6rem 0.9rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.link-input-row button:hover {
+  background: var(--accent);
+  color: var(--primary-dark);
+}
+.iframe-container {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  margin-bottom: 0.5rem;
+}
+.iframe-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #000;
+}
+.track-info-row {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  font-size: 1.05rem;
+  color: var(--fg);
+  min-height: 2.2rem;
+}
+.track-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-bottom: 0.3rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+}
+.player-controls {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  justify-content: center;
+}
+.player-controls button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.player-controls button:hover {
+  background: var(--accent);
+  color: var(--primary-dark);
+}
+.app-footer {
+  background: var(--footer-bg);
+  color: var(--fg);
+  text-align: center;
+  padding: 1rem 0 0.5rem 0;
+  font-size: 1rem;
+  border-top: 1px solid #eee2;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.04);
+}
+/* Side panels (favorites/history/playlist) */
+.side-panel {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  width: 320px;
+  max-width: 90vw;
+  height: 70vh;
+  background: var(--panel-bg);
+  box-shadow: var(--panel-shadow);
+  border-radius: 16px 0 0 16px;
+  z-index: 10;
+  padding: 1.2rem 1rem 1rem 1.2rem;
+  overflow-y: auto;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 1;
+}
+.side-panel.hidden {
+  transform: translateX(120%);
+  opacity: 0;
+  pointer-events: none;
+}
+.side-panel h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  color: var(--primary);
+}
+.side-panel ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.side-panel li {
+  margin-bottom: 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+.side-panel button {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--primary);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+/* Mini player */
+.mini-player {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 340px;
+  height: 220px;
+  background: var(--card-bg);
+  box-shadow: var(--card-shadow);
+  border-radius: 16px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  transition: box-shadow 0.2s, background 0.2s;
+  cursor: move;
+}
+.mini-player.hidden {
+  display: none;
+}
+.mini-player iframe {
+  width: 100%;
+  height: 140px;
+  border: none;
+  border-radius: 16px 16px 0 0;
+}
+.mini-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+.mini-controls button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  transition: background 0.2s, color 0.2s;
+}
+.mini-controls button:hover {
+  background: var(--accent);
+  color: var(--primary-dark);
+}
+/* Modal (settings) */
+.modal {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.25);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s;
+}
+.modal.hidden {
+  display: none;
+}
+.modal-content {
+  background: var(--card-bg);
+  color: var(--fg);
+  border-radius: 16px;
+  padding: 2rem 2.5rem 1.5rem 2.5rem;
+  box-shadow: var(--card-shadow);
+  min-width: 320px;
+  max-width: 90vw;
+  position: relative;
+}
+.modal-content label {
+  display: block;
+  margin: 1rem 0 0.5rem 0;
+  font-size: 1rem;
+}
+.modal-content input[type="color"] {
+  margin-left: 0.5rem;
+  vertical-align: middle;
+}
+.modal-content .close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 1.5rem;
+  color: var(--primary);
+  cursor: pointer;
+}
+.modal-content button {
+  margin-top: 1.5rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.modal-content button:hover {
+  background: var(--accent);
+  color: var(--primary-dark);
+}
+/* Notification */
+.notification {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  background: var(--notif-bg);
+  color: var(--notif-fg);
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  z-index: 300;
+  opacity: 1;
+  transition: opacity 0.3s, top 0.3s;
+}
+.notification.hidden {
+  opacity: 0;
+  pointer-events: none;
+  top: 0;
+}
+/* Playlist queue */
+.playlist-queue {
+  background: var(--panel-bg);
+  box-shadow: var(--panel-shadow);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-top: 1rem;
+  max-height: 180px;
+  overflow-y: auto;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.playlist-queue.hidden {
+  display: none;
+}
+/* Responsive */
+@media (max-width: 700px) {
+  .player-card {
+    padding: 1rem 0.5rem 1rem 0.5rem;
+    max-width: 100vw;
+  }
+  .main-content {
+    padding: 1rem 0.2rem 0.5rem 0.2rem;
+  }
+  .app-header {
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+  }
+  .side-panel {
+    width: 95vw;
+    top: 60px;
+    border-radius: 12px 12px 0 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+  }
+  .mini-player {
+    width: 98vw;
+    height: 180px;
+    right: 1vw;
+    bottom: 1vw;
+  }
+  .modal-content {
+    min-width: 0;
+    padding: 1rem 0.5rem 1rem 0.5rem;
+  }
+} 

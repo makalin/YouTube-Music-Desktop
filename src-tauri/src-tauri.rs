@@ -1,0 +1,1 @@
+// Placeholder for src-tauri structure. Main code is in src/main.rs 
