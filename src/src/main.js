@@ -168,19 +168,6 @@ nextBtn.onclick = () => {
 };
 
 // --- Track info update (placeholder) ---
-function updateTrackInfo(url) {
-  if (!url) url = musicFrame.src;
-  if (url.includes('youtube.com/embed/')) {
-    trackTitle.textContent = 'YouTube Video';
-    trackArtist.textContent = '';
-  } else if (url.includes('music.youtube.com')) {
-    trackTitle.textContent = 'YouTube Music';
-    trackArtist.textContent = '';
-  } else {
-    trackTitle.textContent = 'No track loaded';
-    trackArtist.textContent = '';
-  }
-}
 
 // Autofill input with current iframe src on load
 musicFrame.onload = () => {
